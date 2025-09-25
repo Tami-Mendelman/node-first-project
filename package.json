@@ -1,0 +1,28 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tami-Mendelman/node-first-project.git"
+  },
+  "author": "Tami",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tami-Mendelman/node-first-project/issues"
+  },
+  "homepage": "https://github.com/Tami-Mendelman/node-first-project#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
