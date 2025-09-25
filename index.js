@@ -1,15 +1,20 @@
-
 const express = require('express');
 const app = express();
 const port = 3000;
 
 const bookDb = require('./data/bookDb');
+const logger = require('./middleware/middlewareBook'); 
+
+
+app.use(logger);
 
 app.use(express.json());
+
 
 app.get('/books', (req, res) => {
   res.json(bookDb.getAllBooks());
 });
+
 
 app.get('/books/:id', (req, res) => {
   const id = String(req.params.id);
@@ -17,6 +22,7 @@ app.get('/books/:id', (req, res) => {
   if (!book) return res.status(404).json({ error: 'Book not found' });
   res.json(book);
 });
+
 
 app.post('/books', (req, res) => {
   try {
@@ -26,7 +32,7 @@ app.post('/books', (req, res) => {
   } catch (e) {
     const map = {
       TITLE_REQUIRED: [400, 'title is required (string)'],
-      ID_EXISTS:      [409, 'id already exists']
+      ID_EXISTS: [409, 'id already exists'],
     };
     const [code, msg] = map[e] || [500, 'unexpected error'];
     res.status(code).json({ error: msg });
@@ -41,9 +47,10 @@ app.patch('/books/:id', (req, res) => {
     if (!updated) return res.status(404).json({ error: 'Book not found' });
     res.json(updated);
   } catch (e) {
-    const [code, msg] = e === 'TITLE_REQUIRED'
-      ? [400, 'title is required (string)']
-      : [500, 'unexpected error'];
+    const [code, msg] =
+      e === 'TITLE_REQUIRED'
+        ? [400, 'title is required (string)']
+        : [500, 'unexpected error'];
     res.status(code).json({ error: msg });
   }
 });
